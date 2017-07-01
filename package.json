@@ -1,0 +1,18 @@
+{
+  "name": "self-care",
+  "version": "0.1.0",
+  "description": "A menubar/tray app to maintain healthy habits",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adityavhegde/self-care.git"
+  },
+  "author": "Aditya Hegde, Ameya Shenoy",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.6.11"
+  }
+}
