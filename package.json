@@ -13,6 +13,6 @@
   "author": "Aditya Hegde, Ameya Shenoy",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^1.6.11"
+    "electron": "^1.6.11",
   }
 }
