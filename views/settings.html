@@ -12,11 +12,15 @@
 
 <body>
 	<div class="container">
-  	<div>
+  		<div class="container" style="margin-left:-15px; margin-top: 15px">
   		<!-- #TODO: add settings icon -->
   		<!-- #TODO: add back-button and functionality for the same -->
-  		<h3>Settings</h3>
-  	</div>
+  			<button type="button" class="btn btn-default"> 
+  				<span class="glyphicon glyphicon-chevron-left"></span>
+			</button>
+  			<h3 style="vertical-align:middle; display: inline;"> 
+			Settings</h3>
+  		</div>
   	
   	<hr>
 
@@ -27,9 +31,11 @@
   	 		<span class="glyphicon glyphicon-pencil" style="margin-right:5px"></span>
   	 		Set Day Hours
   	 	</button>
-  	 	<div id="day-hours" style="display: none">
-  	 		Wake up time <input type="number"/><br>
-  	 		Sleep time <input type="number"/>
+  	 	<div id="day-hours" style="margin-top: 10px; display: none">
+  	 		Wake up time <input type="number" placeholder="HH" style="width:40px">
+  	 			<input type="number" placeholder="HH" style="width:40px"><br>
+  	 		Sleep time <input type="number" placeholder="HH" style="width:40px">
+  	 			<input type="number" placeholder="HH" style="width:40px">
   	 	</div>
   	 </div>
 
