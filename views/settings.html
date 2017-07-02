@@ -7,6 +7,9 @@
   <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./css/app.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/settings.js"></script>
 
 </head>
 
@@ -27,11 +30,21 @@
   	<!-- #TODO: center the buttons-->
   	<!-- #TODO: match width of both buttons-->  	
   	<div class="row" style="text-align: center;">
-  	 	<button type="button" class="btn btn-primary">
+  	 	<button type="button" class="btn btn-primary" id="edit-day-hours">
   	 		<span class="glyphicon glyphicon-pencil" style="margin-right:5px"></span>
   	 		Set Day Hours
   	 	</button>
-  	 	<div id="day-hours" style="margin-top: 10px; display: none">
+
+  	 	<div style="display: none;">
+	  	 	<button type="button" class="btn btn-success" style="width: 69px" data-toggle="tooltip" title="Save Changes">
+	  	 		<span class="glyphicon glyphicon-floppy-saved"></span>
+	  	 	</button>
+	  	 	<button type="button" class="btn btn-danger" style="width: 69px" data-toggle="tooltip" title="Discard Changes">
+	  	 		<span class="glyphicon glyphicon-trash"></span>
+	  	 	</button>	
+	  	</div>
+
+  	 	<div id="input-day-hours" style="margin-top: 10px; display: none">
   	 		Wake up time <input type="number" placeholder="HH" style="width:40px">
   	 			<input type="number" placeholder="HH" style="width:40px"><br>
   	 		Sleep time <input type="number" placeholder="HH" style="width:40px">
@@ -45,6 +58,16 @@
   	 		<span class="glyphicon glyphicon-pencil" style="margin-right:5px"></span>
   	 		Set Interval
   	 	</button>
+
+  	 	<div style="display: none;">
+	  	 	<button type="button" class="btn btn-success" style="width: 69px" data-toggle="tooltip" title="Save Changes">
+	  	 		<span class="glyphicon glyphicon-floppy-saved"></span>
+	  	 	</button>
+	  	 	<button type="button" class="btn btn-danger" style="width: 69px" data-toggle="tooltip" title="Discard Changes">
+	  	 		<span class="glyphicon glyphicon-trash"></span>
+	  	 	</button>	
+	  	</div>
+
   	 	<div id="day-interval" style="display: none">
   	 		<br>
   	 		<input type="number" placeholder="Set the reminder intervals" /><br>
