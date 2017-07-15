@@ -12,9 +12,6 @@
 
 <body>
 	<div class="container">
-
-	<!-- #TODO: add status message div should vanish in 10-20 seconds -->
-
   		<div class="container" style="margin-left:-15px; margin-top: 15px">
   		<!-- #TODO: add settings icon -->
   		<!-- #TODO: add back-button and functionality for the same -->
@@ -27,6 +24,12 @@
   	
   	<hr>
 
+	<!-- #TODO: add status message div should vanish in 10-20 seconds -->
+
+  	<div class="alert alert-success" id="statusMsgToUser" style="display:none">
+		<span class="glyphicon glyphicon-ok"></span> Hours edited succesfully!
+	 </div>
+
   	<!-- SET WAKE HOURS SETTINGS -->
   	<div class="row" style="text-align: center;">
   	 	<button type="button" class="btn btn-primary" id="edit-day-hours">
@@ -34,22 +37,31 @@
   	 		Set Day Hours
   	 	</button>
 
-  	 	<div style="display: none;">
-	  	 	<button type="button" class="btn btn-success" style="width: 69px" data-toggle="tooltip" title="Save Changes">
-	  	 		<span class="glyphicon glyphicon-floppy-saved"></span>
-	  	 	</button>
-	  	 	<button type="button" class="btn btn-danger" style="width: 69px" data-toggle="tooltip" title="Discard Changes">
-	  	 		<span class="glyphicon glyphicon-trash"></span>
-	  	 	</button>	
-	  	</div>
+  	 	<form style="display: none;">
+  	 		<!-- SAVE/DISCARD BUTTONS -->
+  	 		<div>
+	  		 	<button type="submit" class="btn btn-success" style="width: 69px" data-toggle="tooltip" title="Save Changes">
+	  		 		<span class="glyphicon glyphicon-floppy-saved"></span>
+	  		 	</button>
+	  		 	<button type="button" class="btn btn-danger" style="width: 69px" data-toggle="tooltip" title="Discard Changes">
+	  		 		<span class="glyphicon glyphicon-trash"></span>
+	  		 	</button>	
+	  		</div>
+	
+		  		<!-- INPUT -->
+	  	 		<div id="input-day-hours" style="margin-top: 10px;" class="greyText">
+	  	 			<div>
+	  	 				<b>WAKE UP</b> <input type="number" placeholder="HH" style="display: inline; width:40px" class=	"form-control" name="wakeTimeHH">	
+	  	 					<input type="number" placeholder="MM" style="display: inline; width:40px" class="	form-control" name="wakeTimeMM"><br>
+	  	 			</div>
 
-  	 	<div id="input-day-hours" style="margin-top: 10px; display: none">
-  	 		Wake up time <input type="number" placeholder="HH" style="width:40px">
-  	 			<input type="number" placeholder="HH" style="width:40px"><br>
-  	 		Sleep time <input type="number" placeholder="HH" style="width:40px">
-  	 			<input type="number" placeholder="HH" style="width:40px">
-  	 	</div>
+	  	 			<div style="margin-top: 10px">
+	  	 				<b>SLEEP</b> <input type="number" placeholder="HH" style="display: inline; margin-left:15px; width:40px" class="	form-control" name="sleepTimeHH">	
+	  	 					<input type="number" placeholder="MM" style="display: inline; width:40px" class="	form-control" name="sleepTimeMM">
+	  	 			</div>
+  	 		</div>
   	 </div>
+  	 </form>
 
   	 <!-- SET INTERVAL BUTTON -->
   	 <br>
@@ -79,7 +91,9 @@
 <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 <script src="./js/jquery-3.2.1.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
-<script src="./js/settings.js"></script>
+<script type="text/javascript"> require('./js/settings.js')</script>
+<!-- //comment: above line for browser test
+<script src="./js/settings.js"></script> -->
 <script>if (window.module) module = window.module;</script>
 
 </html>

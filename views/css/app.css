@@ -3,3 +3,18 @@ hr {
 	height: 1px;
 	background-color: #a6a6a6
 }
+
+/*disables the scrolling inside inputs*/
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] {
+	padding: 0px;
+}
+
+.greyText {
+	color: #808080;
+}

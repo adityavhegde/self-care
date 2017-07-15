@@ -1,4 +1,5 @@
 const menubar = require('menubar');
+const ipcMain = require('electron').ipcMain;
 const path = require('path')
 //pass the options to create the necessary menu
 //menubar returned object already creates an app instance
@@ -16,5 +17,19 @@ const options = {
 	'height': 250,
 	'icon': iconPath
 }
+
+var userConfig;
+
+var wakeTimeHH = 7; 
+var wakeTimeMM = 0;
+var sleepTimeHH = 23;
+var sleepTimeMM = 0;
+
+ipcMain.on('submitForm', (event, data) => {
+	userConfig = data;
+	console.log(userConfig);
+});
+
+
 
 var menuInstance = new menubar(options);
