@@ -17,5 +17,4 @@ const options = {
 	'icon': iconPath
 }
 
-
 var menuInstance = new menubar(options);
