@@ -39,8 +39,19 @@ function setUpListeners() {
 
 function setUpFormActions() {
 
+	$('#submit-1').bind('click', function() {
+		var data = {};
+		data.wakeTimeHH = $('#wakeTimeHH').val();
+		data.wakeTimeMM = $('#wakeTimeMM').val();
+		data.sleepTimeHH = $('#sleepTimeHH').val();
+		data.sleepTimeMM = $('#sleepTimeMM').val();
+		data.userInterval = $('#userInterval').val();
+
+		console.log(data);
+	});
+
     $('#form-1').on('submit', (e) => {
-    	e.preventDefault();
+    	//e.preventDefault();
     	//comment: below line for browser test
     	//ipcRenderer.send('submitForm-1', getFormData(this));
     	console.log(getFormData(this));

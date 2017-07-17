@@ -44,7 +44,7 @@
 		<form style="display: none;" id="form-1">
 			<!-- SAVE/DISCARD BUTTONS -->
 			<div>
-				<button type="submit" class="btn btn-success" style="width: 69px" data-toggle="tooltip" title="Save Changes">
+				<button type="button" class="btn btn-success" id="submit-1" style="width: 69px" data-toggle="tooltip" title="Save Changes">
 					<span class="glyphicon glyphicon-floppy-saved"></span>
 				</button>
 				<button type="button" class="btn btn-danger" style="width: 69px" id="discard-1" data-toggle="tooltip" title="Discard Changes">
@@ -53,17 +53,17 @@
 			</div>
 	
 				<!-- INPUT -->
-				<div id="input-day-hours" style="margin-top: 10px;" class="greyText">
-					<div>
-						<b>WAKE UP</b> <input type="number" placeholder="HH" style="display: inline; width:40px" class="form-control" name="wakeTimeHH">	
-							<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control" name="wakeTimeMM"><br>
-					</div>
+			<div id="input-day-hours" style="margin-top: 10px;" class="greyText">
+				<div>
+					<b>WAKE UP</b> <input type="number" placeholder="HH" style="display: inline; width:40px" class="form-control" id="wakeTimeHH">	
+						<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control" id="wakeTimeMM"><br>
+				</div>
 
-					<div style="margin-top: 10px">
-						<b>SLEEP</b> <input type="number" placeholder="HH" style="display: inline; margin-left:15px; width:40px" class="form-control" name="sleepTimeHH">	
-							<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control"
-							name="sleepTimeMM">
-					</div>
+				<div style="margin-top: 10px">
+					<b>SLEEP</b> <input type="number" placeholder="HH" style="display: inline; margin-left:15px; width:40px" class="form-control" id="sleepTimeHH">	
+						<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control"
+						id="sleepTimeMM">
+				</div>
 			</div>
 		</form>
 	 </div>
@@ -79,7 +79,7 @@
 
 		<form style="display: none;" id="form-2">
 			<div>
-				<button type="submit" class="btn btn-success" style="width: 69px;" data-toggle="tooltip" title="Save Changes">
+				<button type="button" class="btn btn-success" style="width: 69px;" data-toggle="tooltip" title="Save Changes">
 					<span class="glyphicon glyphicon-floppy-saved"></span>
 				</button>
 				<button type="button" class="btn btn-danger" style="width: 69px" id="discard-2" data-toggle="tooltip" title="Discard Changes">
@@ -89,7 +89,7 @@
 	
 			<div id="day-interval">
 				<br>
-				<input type="number" placeholder="Set the reminder intervals" /><br>
+				<input type="number" placeholder="Set the reminder intervals" id="userInterval"/><br>
 			</div>
 		</form>
 	 </div>
