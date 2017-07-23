@@ -41,64 +41,93 @@ function setUpFormActions() {
 
 	$('#submit-1').bind('click', function() {
 		var data = {};
+        var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-ok-circle"></span> Hours edited succesfully</b></div>';
+
 		data.wakeTimeHH = $('#wakeTimeHH').val();
 		data.wakeTimeMM = $('#wakeTimeMM').val();
 		data.sleepTimeHH = $('#sleepTimeHH').val();
 		data.sleepTimeMM = $('#sleepTimeMM').val();
-		data.userInterval = $('#userInterval').val();
+
+        $('#form-1').hide();
+        $('#edit-day-hours').fadeIn();
+
+        $('#statusMsgToUser-1').append(statusHtml);
+        $('#statusMsgToUser-1').fadeIn();
+        $('#statusMsgToUser-1').addClass('alert-success');
+
+        setTimeout( () => {
+            $('#statusMsgToUser-1').children().remove();
+            $('#statusMsgToUser-1').empty();
+            $('#statusMsgToUser-1').css('display','none');
+
+        }, 5000);        
 
 		console.log(data);
-	});
+	});  
 
-    $('#form-1').on('submit', (e) => {
-    	//e.preventDefault();
-    	//comment: below line for browser test
-    	//ipcRenderer.send('submitForm-1', getFormData(this));
-    	console.log(getFormData(this));
-    	$('#form-1').hide();
-    	$('#statusMsgToUser-1').html("");
-    	$('#edit-day-hours').fadeIn();
+    $('#submit-2').bind('click', function() {
+        var interval;
+        var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-ok-circle"></span> Interval edited succesfully</b></div>';
 
-    	$('#statusMsgToUser-1').append('<span class="glyphicon glyphicon-ok"></span> Hours edited succesfully!');
-    	$('#statusMsgToUser-1').fadeIn();
-    	$('#statusMsgToUser-1').addClass('alert-success');
+        interval = $('userInterval').val();
 
-    	setTimeout( () => $('#statusMsgToUser-1').css('display','none'), 3000);
+        $('#form-2').hide();
+        $('#edit-interval').fadeIn();
+
+        $('#statusMsgToUser-2').append(statusHtml);
+        $('#statusMsgToUser-2').fadeIn();
+        $('#statusMsgToUser-2').addClass('alert-success');
+
+        setTimeout( () => {
+            $('#statusMsgToUser-2').children().remove();
+            $('#statusMsgToUser-2').empty();
+            $('#statusMsgToUser-2').css('display','none');
+
+        }, 5000);        
+
+        console.log(data);
+    });  
+
+    $('#discard-1').bind('click', function() {
+        $(this).fadeIn();
+        var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-remove-circle"></span> Changes Discarded</b></div>';
+
+        $('#statusMsgToUser-1').children().remove();
+        $('#statusMsgToUser-1').empty();
+        $('#statusMsgToUser-1').fadeIn();
+
+        $('#statusMsgToUser-1').append(statusHtml);
+        $('#statusMsgToUser-1').addClass('alert-danger');
+
+        setTimeout( () => {
+            $('#statusMsgToUser-1').children().remove();
+            $('#statusMsgToUser-1').empty();
+            $('#statusMsgToUser-1').css('display','none');
+            $('#statusMsgToUser-1').removeClass('alert-danger');
+
+        }, 5000);      
 
     });
 
+    $('#discard-2').bind('click', function() {
+        $(this).fadeIn();
+        var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-remove-circle"></span> Changes Discarded</b></div>';
 
-    $('#form-2').on('submit', (e) => {
-    	e.preventDefault();
-    	//comment: below line for browser test
-    	//ipcRenderer.send('submitForm-2', getFormData(this));
-    	
-    	$('#form-2').hide();
-    	//clear html and then reset
-    	$('#statusMsgToUser-2').html("");
-    	$('#edit-interval').fadeIn();
-    	$('#statusMsgToUser-2').append('<span class="glyphicon glyphicon-ok"></span> Interval edited succesfully!');
-    	$('#statusMsgToUser-2').fadeIn();
-    	$('#statusMsgToUser-2').addClass('alert-success');
+        $('#statusMsgToUser-2').children().remove();
+        $('#statusMsgToUser-2').empty();
+        $('#statusMsgToUser-2').fadeIn();
 
-    	setTimeout( () => $('#statusMsgToUser-2').css('display','none'), 3000);
+        $('#statusMsgToUser-2').append(statusHtml);
+        $('#statusMsgToUser-2').addClass('alert-danger');
+
+        setTimeout( () => {
+            $('#statusMsgToUser-2').children().remove();
+            $('#statusMsgToUser-2').empty();
+            $('#statusMsgToUser-2').css('display','none');
+            $('#statusMsgToUser-2').removeClass('alert-danger');
+
+        }, 5000);      
 
     });
-}
-
-function getFormData(e) {
-   var data = {};
-   var dataArray = $(e).serializeArray();
-
-   //#TODO: refactor using correct standards for the loop
-   for(var i=0;i<dataArray.length;i++){
-     	data[dataArray[i].name] = dataArray[i].value;
-   }
-
-   return data;
-}
-
-function statusMsgToUser() {
 
 }
-
