@@ -6,8 +6,9 @@ setInterval( () => {
 }, 1000);
 setInterval( () => {}, 2000); */
 
-//#TODO: turn into singleton
 var ipcRenderer = require('electron').ipcRenderer;
+
+var instance;
 
 var Scheduler = function() {
 	this.schedule = [];
@@ -73,7 +74,13 @@ Scheduler.prototype.stopTimer = function() {
 	clearInterval(this.IdToClearInterval);
 }
 
-module.exports = new Scheduler();
+Scheduler.prototype.getInstance = function() {
+	if(instance == null) 
+		return new Scheduler();
+	else return instance;
+}
+
+module.exports = getInstance();
 
 /*
 OLD LOGIC; runs scheduler
