@@ -1,6 +1,7 @@
 const menubar = require('menubar');
 const ipcMain = require('electron').ipcMain;
 const path = require('path')
+const scheduleInstance = require('./views/js/algorithm');
 //pass the options to create the necessary menu
 //menubar returned object already creates an app instance
 
@@ -17,6 +18,10 @@ const options = {
 	'height': 250,
 	'icon': iconPath
 }
+
+scheduleInstance.calculateRemindTimes();
+
+console.log(scheduleInstance);
 
 ipcMain.on('submitForm', (event, data) => {
 	userConfig = data;

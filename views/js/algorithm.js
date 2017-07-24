@@ -15,25 +15,25 @@ var Scheduler = function() {
 	
 	//default user-config and intervals
 	this.userConfig = {
-		wakeTimeHH: 7, 
-		wakeTimeMM: 0,
-		sleepTimeHH: 23,
-		sleepTimeMM: 0
+		'wakeTimeHH': 7, 
+		'wakeTimeMM': 0,
+		'sleepTimeHH': 22,
+		'sleepTimeMM': 0
 	}
 
-	this.interval = 1;
+	this.interval = 6;
 
 	this.IdToClearInterval = "";
 
 }
 
-Scheduler.prototype.updateUserConfig = function(userConfig) {
-	this.userConfig = userConfig;
-}
+Scheduler.prototype.updateUserConfig = function(config) {
+	this.userConfig = config;
+};
 
 Scheduler.prototype.updateInterval = function(interval) {
 	this.interval = interval;
-}
+};
 
 Scheduler.prototype.calculateRemindTimes = function() {
 	var schedule = this.schedule;
@@ -43,17 +43,32 @@ Scheduler.prototype.calculateRemindTimes = function() {
 	var interval = this.interval;
 
 	var currTime = wakeTimeHH;
-	while(true) {
-		if( (currTime + interval)%24 > sleepTimeHH ) 
-			break;
-		else {
-			schedule.push(currTime + interval);
-			currTime = currTime + interval;
-		}
+	var numSchedules;
 
+	if(wakeTimeHH < sleepTimeHH){
+		numSchedules = parseInt((sleepTimeHH - wakeTimeHH)/this.interval);
+	}
+	else {
+		var hours = (24-wakeTimeHH) + sleepTimeHH;
+		numSchedules = parseInt(hours/this.interval);
 	}
 
-}
+	var i = 0;
+	while(true) {
+		if(i >= numSchedules) {
+			break;
+		}
+		else {
+			if(!((currTime + interval)%24 == sleepTimeHH)){
+			schedule.push((currTime + interval)%24);
+			currTime = currTime + interval;
+			}
+		}
+		i = i + 1;
+
+	}
+	this.schedule = schedule;
+};
 
 Scheduler.prototype.startTimer = function() {
 
@@ -68,17 +83,18 @@ Scheduler.prototype.startTimer = function() {
 	} //if ends
 
 	}, 1000);
-}
+};
 
 Scheduler.prototype.stopTimer = function() {
 	clearInterval(this.IdToClearInterval);
-}
+};
 
-Scheduler.prototype.getInstance = function() {
+
+function getInstance() {
 	if(instance == null) 
-		return new Scheduler();
+		return instance = new Scheduler();
 	else return instance;
-}
+};
 
 module.exports = getInstance();
 
