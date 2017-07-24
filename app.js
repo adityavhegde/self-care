@@ -1,7 +1,7 @@
 const menubar = require('menubar');
 const ipcMain = require('electron').ipcMain;
 const path = require('path')
-const scheduleInstance = require('./views/js/algorithm');
+const schedulerInstance = require('./views/js/algorithm');
 //pass the options to create the necessary menu
 //menubar returned object already creates an app instance
 
@@ -19,15 +19,22 @@ const options = {
 	'icon': iconPath
 }
 
-scheduleInstance.calculateRemindTimes();
+//Start the scheduler
+schedulerInstance.calculateRemindTimes();
+schedulerInstance.startTimer();
 
-console.log(scheduleInstance);
 
-ipcMain.on('submitForm', (event, data) => {
-	userConfig = data;
-	console.log(userConfig);
+ipcMain.on('update-user-config', (event, data) => {
+	schedulerInstance.updateUserConfig(data);
+	schedulerInstance.calculateRemindTimes();
+	schedulerInstance.startTimer();
 });
 
+ipcMain.on('update-interval', (event, data) => {
+	schedulerInstance.updateInterval(parseInt(data.interval));
+	schedulerInstance.calculateRemindTimes();
+	schedulerInstance.startTimer();
+});
 
 ipcMain.on('alert-user', (event, data) => {
 	//#TODO: code for modal

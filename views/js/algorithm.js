@@ -17,26 +17,34 @@ var Scheduler = function() {
 	this.userConfig = {
 		'wakeTimeHH': 7, 
 		'wakeTimeMM': 0,
-		'sleepTimeHH': 22,
+		'sleepTimeHH': 21,
 		'sleepTimeMM': 0
 	}
 
-	this.interval = 6;
+	this.interval = 3;
 
 	this.IdToClearInterval = "";
 
 }
 
 Scheduler.prototype.updateUserConfig = function(config) {
-	this.userConfig = config;
+	console.log('user config updated:');
+	this.userConfig.wakeTimeHH = parseInt(config.wakeTimeHH);
+	this.userConfig.wakeTimeMM = parseInt(config.wakeTimeMM);
+	this.userConfig.sleepTimeHH = parseInt(config.sleepTimeHH);
+	this.userConfig.sleepTimeMM = parseInt(config.sleepTimeMM);
+	console.log(config);
+
 };
 
 Scheduler.prototype.updateInterval = function(interval) {
 	this.interval = interval;
+	console.log('interval updated: ' + interval);
 };
 
 Scheduler.prototype.calculateRemindTimes = function() {
-	var schedule = this.schedule;
+	this.schedule = [];
+	var schedule = [];
 
 	var wakeTimeHH = this.userConfig.wakeTimeHH;
 	var sleepTimeHH = this.userConfig.sleepTimeHH;
@@ -68,21 +76,27 @@ Scheduler.prototype.calculateRemindTimes = function() {
 
 	}
 	this.schedule = schedule;
+	console.log('alarm times calculated: '+ new Date());
+	console.log('schedule ring times: ' + schedule);
 };
 
 Scheduler.prototype.startTimer = function() {
 
+	var schedule = this.schedule;
+	var wakeTimeMM = this.userConfig.wakeTimeMM;
+
 	this.IdToClearInterval = setInterval( function() {
 		//use interprocess communication to send alerts
 		//start alerts from app.js
-	if(!(undefined == this.schedule.find( function(hour) {
-		return new Date().getHours() == hour;
-	})) && (new Date().getMinutes() == wakeTimeMM) && (new Date().getSeconds() == 0)){
-		//ipc to app.js to open up a modal that alerts user
-		ipcRenderer.send('alert-user', {});
-	} //if ends
+		if(!(undefined == schedule.find( function(hour) {
+			return new Date().getHours() 
+		})) && (new Date().getMinutes() == wakeTimeMM) && (new Date().getSeconds() == 0)){
+			//ipc to app.js to open up a modal that alerts user
+			ipcRenderer.send('alert-user', {});
+		} //if ends
 
 	}, 1000);
+	console.log('scheduler started: ' + new Date());
 };
 
 Scheduler.prototype.stopTimer = function() {

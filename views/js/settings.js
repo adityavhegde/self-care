@@ -1,5 +1,5 @@
 //comment: below line for browser test
-//let ipcRenderer = require('electron').ipcRenderer; 
+var ipcRenderer = require('electron').ipcRenderer; 
 
 $(document).ready( () => {
 
@@ -48,6 +48,8 @@ function setUpFormActions() {
 		data.sleepTimeHH = $('#sleepTimeHH').val();
 		data.sleepTimeMM = $('#sleepTimeMM').val();
 
+        ipcRenderer.send('update-user-config', data);
+
         $('#form-1').hide();
         $('#edit-day-hours').fadeIn();
 
@@ -69,7 +71,9 @@ function setUpFormActions() {
         var interval;
         var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-ok-circle"></span> Interval edited succesfully</b></div>';
 
-        interval = $('userInterval').val();
+        interval = $('#userInterval').val();
+
+        ipcRenderer.send('update-interval', interval);
 
         $('#form-2').hide();
         $('#edit-interval').fadeIn();
