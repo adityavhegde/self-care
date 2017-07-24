@@ -15,7 +15,7 @@ var Scheduler = function() {
 
 	this.interval = 3;
 
-	this.IdToClearInterval = "";
+	this.IdToClearInterval;
 
 }
 
@@ -93,6 +93,8 @@ Scheduler.prototype.startTimer = function() {
 
 Scheduler.prototype.stopTimer = function() {
 	clearInterval(this.IdToClearInterval);
+	console.log('setTimeout cleared');
+
 };
 
 

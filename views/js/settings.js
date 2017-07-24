@@ -7,6 +7,10 @@ $(document).ready( () => {
     setUpListeners();
     setUpFormActions();
 
+    $('#test-alerts').on('click', function() {
+        ipcRenderer.send('alert-user', {});
+    })
+
 });
 
 
