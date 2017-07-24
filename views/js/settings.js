@@ -1,4 +1,3 @@
-//comment: below line for browser test
 var ipcRenderer = require('electron').ipcRenderer; 
 
 $(document).ready( () => {
