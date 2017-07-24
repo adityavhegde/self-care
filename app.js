@@ -18,18 +18,16 @@ const options = {
 	'icon': iconPath
 }
 
-var userConfig;
-
-var wakeTimeHH = 7; 
-var wakeTimeMM = 0;
-var sleepTimeHH = 23;
-var sleepTimeMM = 0;
-
 ipcMain.on('submitForm', (event, data) => {
 	userConfig = data;
 	console.log(userConfig);
 });
 
+
+ipcMain.on('alert-user', (event, data) => {
+	//#TODO: code for modal
+	console.log(data);
+});
 
 
 var menuInstance = new menubar(options);
