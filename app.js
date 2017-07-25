@@ -43,7 +43,13 @@ var win;
 
 ipcMain.on('alert-user', (event, data) => {
 	//#TODO: code for modal
-	win = new BrowserWindow({width: 600, height: 200});
+	win = new BrowserWindow({
+		'width': 600, 
+		'height': 185, 
+		'title': 'Walky',
+		'frame': false,
+		'resizeable': false
+	});
 	win.setMenu(null);
 	win.loadURL(alertPage);
 
@@ -55,7 +61,10 @@ ipcMain.on('alert-user', (event, data) => {
 	console.log("alert");
 });
 
+ipcMain.on('close-modal', (event, data) => {
+	if(win !== null)
+		win.close();
+});
+
 
 var menuInstance = new menubar(options);
-
-// Load a remote URL
