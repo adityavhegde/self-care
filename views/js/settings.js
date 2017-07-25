@@ -1,4 +1,4 @@
-var ipcRenderer = require('electron').ipcRenderer; 
+let ipcRenderer = require('electron').ipcRenderer; 
 
 $(document).ready( () => {
 

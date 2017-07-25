@@ -1,5 +1,4 @@
 const menubar = require('menubar');
-const BrowserWindow = require('electron').BrowserWindow;
 const ipcMain = require('electron').ipcMain;
 const path = require('path')
 const schedulerInstance = require('./views/js/algorithm');
@@ -11,7 +10,6 @@ const schedulerInstance = require('./views/js/algorithm');
 */
 const iconPath = path.join(__dirname, '/resources/icon.png');
 const indexPage = path.join(__dirname, '/views/index.html');
-var alertPage = path.join(__dirname, '/views/alert.html');
 
 const options = {
 	'index': indexPage,
@@ -38,33 +36,5 @@ ipcMain.on('update-interval', (event, data) => {
 	schedulerInstance.calculateRemindTimes();
 	schedulerInstance.startTimer();
 });
-
-var win;
-
-ipcMain.on('alert-user', (event, data) => {
-	//#TODO: code for modal
-	win = new BrowserWindow({
-		'width': 600, 
-		'height': 185, 
-		'title': 'Walky',
-		'frame': false,
-		'resizeable': false
-	});
-	win.setMenu(null);
-	win.loadURL(alertPage);
-
-
-	win.on('closed', () => {
-	  win = null
-	})
-
-	console.log("alert");
-});
-
-ipcMain.on('close-modal', (event, data) => {
-	if(win !== null)
-		win.close();
-});
-
 
 var menuInstance = new menubar(options);

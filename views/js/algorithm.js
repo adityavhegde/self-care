@@ -1,10 +1,19 @@
-
 var instance;
+
+var ipcMain = require('electron').ipcMain;
+var BrowserWindow = require('electron').BrowserWindow;
+var alertPagePath = require('path').join(__dirname + './../alert.html');
+
+var win;
+
+ipcMain.on('close-modal', (event, data) => {
+	if(win !== null)
+		win.close();
+});
 
 var Scheduler = function() {
 	this.schedule = [];
-	this.ipcRenderer = require('electron').ipcRenderer;
-	
+
 	//default user-config and intervals
 	this.userConfig = {
 		'wakeTimeHH': 7, 
@@ -13,7 +22,7 @@ var Scheduler = function() {
 		'sleepTimeMM': 0
 	}
 
-	this.interval = 3;
+	this.interval = 1;
 
 	this.IdToClearInterval;
 
@@ -76,19 +85,29 @@ Scheduler.prototype.startTimer = function() {
 
 	var schedule = this.schedule;
 	var wakeTimeMM = this.userConfig.wakeTimeMM;
-	var ipcRenderer = this.ipcRenderer;
 
 	this.IdToClearInterval = setInterval( function() {
-		//use interprocess communication to send alerts
-		//start alerts from app.js
 		if(!(undefined == schedule.find( function(hour) {
 			return new Date().getHours() 
 		})) && (new Date().getMinutes() == wakeTimeMM) && (new Date().getSeconds() == 0)){
-			//ipc to app.js to open up a modal that alerts user
-			ipcRenderer.send('alert-user', {});
-		}
+			win = new BrowserWindow({
+						'width': 600, 
+						'height': 185, 
+						'title': 'Walky',
+						'frame': false,
+						'resizeable': false
+					});
+			win.setMenu(null);
+			win.loadURL(alertPagePath);
+
+			//#TODO: is the placement of this listener correct ?
+			win.on('closed', () => {
+				win = null
+			});
+		} //if-ends
 
 	}, 1000);
+
 	console.log('scheduler started: ' + new Date());
 };
 
@@ -98,10 +117,10 @@ Scheduler.prototype.stopTimer = function() {
 
 };
 
-
 function getInstance() {
-	if(instance == null) 
+	if(instance == null) {
 		return instance = new Scheduler();
+	}
 	else return instance;
 };
 
