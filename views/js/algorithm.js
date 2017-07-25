@@ -1,9 +1,9 @@
-var ipcRenderer = require('electron').ipcRenderer;
 
 var instance;
 
 var Scheduler = function() {
 	this.schedule = [];
+	this.ipcRenderer = require('electron').ipcRenderer;
 	
 	//default user-config and intervals
 	this.userConfig = {
@@ -76,6 +76,7 @@ Scheduler.prototype.startTimer = function() {
 
 	var schedule = this.schedule;
 	var wakeTimeMM = this.userConfig.wakeTimeMM;
+	var ipcRenderer = this.ipcRenderer;
 
 	this.IdToClearInterval = setInterval( function() {
 		//use interprocess communication to send alerts
