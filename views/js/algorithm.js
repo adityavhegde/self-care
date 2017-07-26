@@ -2,7 +2,10 @@ var instance;
 
 var ipcMain = require('electron').ipcMain;
 var BrowserWindow = require('electron').BrowserWindow;
+var fs = require('fs');
+
 var alertPagePath = require('path').join(__dirname + './../alert.html');
+var errorPagePath = require('path').join(__dirname + './../error.html');
 
 var win;
 
@@ -14,33 +17,82 @@ ipcMain.on('close-modal', (event, data) => {
 var Scheduler = function() {
 	this.schedule = [];
 
-	//default user-config and intervals
-	this.userConfig = {
-		'wakeTimeHH': 7, 
-		'wakeTimeMM': 0,
-		'sleepTimeHH': 21,
-		'sleepTimeMM': 0
-	}
+	this.userConfig;
 
-	this.interval = 1;
+	this.interval;
 
 	this.IdToClearInterval;
 
 }
 
+/*
+Configurations are read from file.
+However, this happens only when the application loads.
+When configs are updated, they are also written to config.json.
+However, updated configs are read directly from the Scheduler Object's variables.
+*/
+
+Scheduler.prototype.initUserConfig = function() {
+	var data = fs.readFileSync('./config.json');
+	var userConfigObj;
+	
+	userConfigObj = JSON.parse(data);
+	//#TODO: add try-catch block for error handling
+	console.log('INFO: succesfully read user-config from config.json: ');
+	console.log(JSON.stringify(userConfigObj));
+	
+	this.userConfig = userConfigObj.hours;
+	this.interval = userConfigObj.interval;		
+}
+
 Scheduler.prototype.updateUserConfig = function(config) {
-	console.log('user config updated:');
 	this.userConfig.wakeTimeHH = parseInt(config.wakeTimeHH);
 	this.userConfig.wakeTimeMM = parseInt(config.wakeTimeMM);
 	this.userConfig.sleepTimeHH = parseInt(config.sleepTimeHH);
 	this.userConfig.sleepTimeMM = parseInt(config.sleepTimeMM);
-	console.log(config);
+	console.log('INFO: user day-hours config updated:');
+	console.log(JSON.stringify(config));
+	
+	//write updated config to config.json
+	var hours = this.userConfig;
+
+	var updatedConfig = { 
+		hours, 
+		'interval': this.interval
+	};
+
+	var data = JSON.stringify(updatedConfig);
+
+	fs.writeFile('./config.json', data, function(err) {
+		if(err) {
+			console.log('ERROR: there was problem updating config in config.json');
+		}
+		console.log('INFO: succesfully updated user day-hours in config.json');
+	});
 
 };
 
 Scheduler.prototype.updateInterval = function(interval) {
 	this.interval = interval;
-	console.log('interval updated: ' + interval);
+	console.log('INFO: interval updated: ' + interval);
+
+	//write updated interval to config.json
+	var hours = this.userConfig;
+
+	var updatedConfig = {
+		hours,
+		'interval': interval
+	};
+
+	var data = JSON.stringify(updatedConfig);
+
+	fs.writeFile('./config.json', data, function(err) {
+		if(err) {
+			console.log('ERROR: there was problem updating config in config.json');
+		}
+		console.log('INFO: succesfully updated user Interval in config.json');
+	});
+
 };
 
 Scheduler.prototype.calculateRemindTimes = function() {
@@ -90,7 +142,7 @@ Scheduler.prototype.startTimer = function() {
 		if(!(undefined == schedule.find( function(hour) {
 			return new Date().getHours() == hour; 
 		})) && (new Date().getMinutes() == wakeTimeMM) && (new Date().getSeconds() == 0)){
-			console.log('fire modal');
+			console.log('INFO: firing modal');
 			
 			//close any previous window running
 			if(win !== null && win!== undefined) {
@@ -98,12 +150,12 @@ Scheduler.prototype.startTimer = function() {
 			}
 			else {
 				win = new BrowserWindow({
-							'width': 600, 
-							'height': 185, 
-							'title': 'Walky',
-							'frame': false,
-							'resizeable': false
-						});
+						'width': 600, 
+						'height': 185, 
+						'title': 'Walky',
+						'frame': false,
+						'resizeable': false
+					});
 				win.setMenu(null);
 				win.loadURL(alertPagePath);
 
