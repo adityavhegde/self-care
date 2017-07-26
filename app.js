@@ -1,6 +1,6 @@
 const menubar = require('menubar');
 const ipcMain = require('electron').ipcMain;
-const path = require('path')
+const path = require('path');
 const schedulerInstance = require('./views/js/algorithm');
 //pass the options to create the necessary menu
 //menubar returned object already creates an app instance
@@ -19,7 +19,10 @@ const options = {
 	'icon': iconPath
 }
 
+var menuInstance = new menubar(options);
+
 //Start the scheduler
+schedulerInstance.initUserConfig();
 schedulerInstance.calculateRemindTimes();
 schedulerInstance.startTimer();
 
@@ -36,5 +39,3 @@ ipcMain.on('update-interval', (event, data) => {
 	schedulerInstance.calculateRemindTimes();
 	schedulerInstance.startTimer();
 });
-
-var menuInstance = new menubar(options);
