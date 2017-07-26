@@ -7,8 +7,8 @@ var alertPagePath = require('path').join(__dirname + './../alert.html');
 var win;
 
 ipcMain.on('close-modal', (event, data) => {
-	if(win !== null)
-		win.close();
+	win.close();
+	win = undefined;
 });
 
 var Scheduler = function() {
@@ -88,22 +88,26 @@ Scheduler.prototype.startTimer = function() {
 
 	this.IdToClearInterval = setInterval( function() {
 		if(!(undefined == schedule.find( function(hour) {
-			return new Date().getHours() 
+			return new Date().getHours() == hour; 
 		})) && (new Date().getMinutes() == wakeTimeMM) && (new Date().getSeconds() == 0)){
-			win = new BrowserWindow({
-						'width': 600, 
-						'height': 185, 
-						'title': 'Walky',
-						'frame': false,
-						'resizeable': false
-					});
-			win.setMenu(null);
-			win.loadURL(alertPagePath);
+			console.log('fire modal');
+			
+			//close any previous window running
+			if(win !== null && win!== undefined) {
+				win.show();
+			}
+			else {
+				win = new BrowserWindow({
+							'width': 600, 
+							'height': 185, 
+							'title': 'Walky',
+							'frame': false,
+							'resizeable': false
+						});
+				win.setMenu(null);
+				win.loadURL(alertPagePath);
 
-			//#TODO: is the placement of this listener correct ?
-			win.on('closed', () => {
-				win = null
-			});
+			}
 		} //if-ends
 
 	}, 1000);

@@ -9,7 +9,7 @@ const schedulerInstance = require('./views/js/algorithm');
 #TODO: add context menu
 */
 const iconPath = path.join(__dirname, '/resources/icon.png');
-const indexPage = path.join(__dirname, '/views/index.html');
+const indexPage = path.join(__dirname, '/views/settings.html');
 
 const options = {
 	'index': indexPage,
