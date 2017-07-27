@@ -20,13 +20,23 @@ function setUpListeners() {
 	$('#edit-day-hours').on('click', function() {
     	$(this).hide();
     	$(this).next().fadeIn();
-    	$('#input-day-hours').fadeIn();
+
+        var data = ipcRenderer.sendSync('auto-fill-day-hours', {});
+        $('#wakeTimeHH').val(data.wakeTimeHH);
+        $('#wakeTimeMM').val(data.wakeTimeMM);
+        $('#sleepTimeHH').val(data.sleepTimeHH);
+        $('#sleepTimeMM').val(data.sleepTimeHH);
+        $('#input-day-hours').fadeIn();
+
     });
 
     $('#edit-interval').on('click', function() {
     	$(this).hide();
     	$(this).next().fadeIn();
-    	$('#input-interval').fadeIn();
+
+        var data = ipcRenderer.sendSync('auto-fill-interval', {});
+        $('#userInterval').val(data);
+
     });
 
 }
@@ -87,8 +97,10 @@ function setUpFormActions() {
     });  
 
     $('#discard-1').bind('click', function() {
-        $(this).fadeIn();
         var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-remove-circle"></span> Changes Discarded</b></div>';
+
+        $('#form-1').hide();
+        $('#edit-day-hours').fadeIn();
 
         $('#statusMsgToUser-1').children().remove();
         $('#statusMsgToUser-1').empty();
@@ -108,8 +120,10 @@ function setUpFormActions() {
     });
 
     $('#discard-2').bind('click', function() {
-        $(this).fadeIn();
         var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-remove-circle"></span> Changes Discarded</b></div>';
+
+        $('#form-2').hide();
+        $('#edit-interval').fadeIn();
 
         $('#statusMsgToUser-2').children().remove();
         $('#statusMsgToUser-2').empty();

@@ -39,3 +39,11 @@ ipcMain.on('update-interval', (event, data) => {
 	schedulerInstance.calculateRemindTimes();
 	schedulerInstance.startTimer();
 });
+
+ipcMain.on('auto-fill-day-hours', (event, data) => {
+	event.returnValue = schedulerInstance.userConfig;
+});
+
+ipcMain.on('auto-fill-interval', (event, data) => {
+	event.returnValue = schedulerInstance.interval;
+});
