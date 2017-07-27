@@ -20,6 +20,8 @@ const options = {
 }
 
 var menuInstance = new menubar(options);
+var app = menuInstance.app;
+
 
 //Start the scheduler
 schedulerInstance.initUserConfig();
@@ -46,4 +48,8 @@ ipcMain.on('auto-fill-day-hours', (event, data) => {
 
 ipcMain.on('auto-fill-interval', (event, data) => {
 	event.returnValue = schedulerInstance.interval;
+});
+
+ipcMain.on('close-app', (event, data) => {
+	app.quit();
 });

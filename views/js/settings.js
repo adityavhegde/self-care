@@ -39,6 +39,9 @@ function setUpListeners() {
 
     });
 
+    $('#close-app-btn').on('click', function() {
+        ipcRenderer.send('close-app', {});
+    });
 }
 
 function setUpFormActions() {
