@@ -29,16 +29,6 @@ function setUpListeners() {
     	$('#input-interval').fadeIn();
     });
 
-    $('#discard-1').on('click', function() {
-    	$('#form-1').hide();
-    	$('#edit-day-hours').fadeIn();
-    });
-
-    $('#discard-2').on('click', function() {
-    	$('#form-2').hide();
-    	$('#edit-interval').fadeIn();
-    });
-
 }
 
 function setUpFormActions() {
