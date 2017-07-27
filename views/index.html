@@ -11,22 +11,102 @@
 </head>
 
 <body>
-  <div class="container">
-  	<div>
-  		<!--#TODO: Change to a nav based UI-->
-  		<!--#TODO: Add Span: This is for the app icon-->
-  		<h3 class="">Walky</h3>
-  		<a class="pull-right btn btn-default" style="margin-top:-40px" href="settings.html">
-  			<span class="glyphicon glyphicon-cog"></span><!--#TODO: add tooltip here-->
-  		</a>
-  	</div>
-  	
-  	<hr>
-  	<br>
+	<div class="container">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <a class="navbar-brand" href="#">Self care</a>
+	          <div class="pull-right" style="margin-right:5px">
+	          	<a style="margin-top:10px" href="#"
+	          	class="btn btn-default" type="button" title="About">
+	          	  <span class="glyphicon glyphicon-info-sign"></span>
+	          	</a>
+	          	<button class="btn btn-default" style="margin-top:10px" type="button" title="Close App">
+	          	  <span class="glyphicon glyphicon-off"></span>
+	          	</button>
+	        </div>
+	        </div>
+	      </div>
+    	</nav>
+	
+		<div class="container">
+			<!-- #TODO: add status message div should vanish in 10-20 seconds -->
+
+			<div class="alert" id="statusMsgToUser-1" style="display:none; padding-bottom: 5px; padding-top: 5px">
+			 </div>
+
+			<div class="alert" id="statusMsgToUser-2" style="display:none; padding-bottom: 5px; padding-top: 5px">
+			 </div>
 
 
 
-  </div>
+			<!-- SET WAKE HOURS SETTINGS -->
+			<div class="row" style="text-align: center;">
+				<button type="button" class="btn btn-primary" id="edit-day-hours">
+					<span class="glyphicon glyphicon-pencil" style="margin-right:5px"></span>
+					Set Day Hours
+				</button>
+
+				<form style="display: none;" id="form-1">
+					<!-- SAVE/DISCARD BUTTONS -->
+					<div>
+						<button type="button" class="btn btn-success" id="submit-1" style="width: 69px" data-toggle="tooltip" title="Save Changes">
+							<span class="glyphicon glyphicon-floppy-saved"></span>
+						</button>
+						<button type="button" class="btn btn-danger" style="width: 69px" id="discard-1" data-toggle="tooltip" title="Discard Changes">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>	
+					</div>
+			
+						<!-- INPUT -->
+					<div id="input-day-hours" style="margin-top: 10px;" class="greyText">
+						<div>
+							<b>WAKE UP</b> <input type="number" placeholder="HH" style="display: inline; width:40px" class="form-control" id="wakeTimeHH">	
+								<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control" id="wakeTimeMM"><br>
+						</div>
+
+						<div style="margin-top: 10px">
+							<b>SLEEP</b> <input type="number" placeholder="HH" style="display: inline; margin-left:15px; width:40px" class="form-control" id="sleepTimeHH">	
+								<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control"
+								id="sleepTimeMM">
+						</div>
+					</div>
+				</form>
+			 </div>
+			 
+
+			 <!-- SET INTERVAL BUTTON -->
+			 <br>
+			 <div class="row" style="text-align: center; margin-top:0px">
+				<button type="button" class="btn btn-primary" style="padding-right: 30px" id="edit-interval">
+					<span class="glyphicon glyphicon-pencil" style="margin-right:5px"></span>
+					Set Interval
+				</button>
+
+				<form style="display: none;" id="form-2">
+					<div>
+						<button type="button" class="btn btn-success" id="submit-2" style="width: 69px;" data-toggle="tooltip" title="Save Changes">
+							<span class="glyphicon glyphicon-floppy-saved"></span>
+						</button>
+						<button type="button" class="btn btn-danger" style="width: 69px" id="discard-2" data-toggle="tooltip" title="Discard Changes">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>	
+					</div>
+					<br>
+					<div id="day-interval" style="margin-left:65px">
+						<input type="number" class="form-control"
+						placeholder="Set the reminder intervals" id="userInterval"/><br>
+					</div>
+				</form>
+			 </div>
+			 <!--TEST modal<div><button id="test-alerts" type="button" class="btn btn-success"></button>-->
+		 </div>	<!-- inner container div -->
+	 </div> <!-- main container div -->
 </body>
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+<script src="./js/jquery-3.2.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script type="text/javascript"> require('./js/settings.js')</script>
+<script>if (window.module) module = window.module;</script>
 
 </html>
