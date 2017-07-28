@@ -8,6 +8,14 @@ var alertPagePath = require('path').join(__dirname + './../alert.html');
 var errorPagePath = require('path').join(__dirname + './../error.html');
 
 var win;
+var browserWindowOptions = {
+	'width': 600, 
+	'height': 185, 
+	'title': 'Walky',
+	'frame': false,
+	'resizable': false,
+	'alwaysOnTop': true
+}
 
 ipcMain.on('close-modal', (event, data) => {
 	win.close();
@@ -149,13 +157,7 @@ Scheduler.prototype.startTimer = function() {
 				win.show();
 			}
 			else {
-				win = new BrowserWindow({
-						'width': 600, 
-						'height': 185, 
-						'title': 'Walky',
-						'frame': false,
-						'resizeable': false
-					});
+				win = new BrowserWindow(browserWindowOptions);
 				win.setMenu(null);
 				win.loadURL(alertPagePath);
 
