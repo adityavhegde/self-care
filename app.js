@@ -15,7 +15,7 @@ const options = {
 	'tooltip': 'Walk reminder',
 	'width': 300,
 	'height': 250,
-	'icon': iconPath
+	/*'icon': iconPath*/
 }
 
 var menuInstance = new menubar(options);
