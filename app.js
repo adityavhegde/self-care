@@ -6,7 +6,7 @@ const schedulerInstance = require('./views/js/algorithm');
 //pass the options to create the necessary menu
 //menubar returned object already creates an app instance
 
-const iconPath = path.join(__dirname, '/resources/icon.png');
+//const iconPath = path.join(__dirname, '/resources/icon.png');
 const indexPage = path.join(__dirname, '/views/index.html');
 const productURL = 'https://github.com/adityavhegde/self-care';
 
