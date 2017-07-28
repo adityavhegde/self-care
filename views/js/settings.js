@@ -42,6 +42,10 @@ function setUpListeners() {
     $('#close-app-btn').on('click', function() {
         ipcRenderer.send('close-app', {});
     });
+
+    $('#info-btn').on('click', function() {
+        ipcRenderer.send('open-info', {});
+    });
 }
 
 function setUpFormActions() {

@@ -1,5 +1,6 @@
 const menubar = require('menubar');
 const ipcMain = require('electron').ipcMain;
+const {shell} = require('electron');
 const path = require('path');
 const schedulerInstance = require('./views/js/algorithm');
 //pass the options to create the necessary menu
@@ -10,6 +11,7 @@ const schedulerInstance = require('./views/js/algorithm');
 */
 const iconPath = path.join(__dirname, '/resources/icon.png');
 const indexPage = path.join(__dirname, '/views/index.html');
+const productURL = 'https://github.com/adityavhegde/self-care';
 
 const options = {
 	'index': indexPage,
@@ -52,4 +54,8 @@ ipcMain.on('auto-fill-interval', (event, data) => {
 
 ipcMain.on('close-app', (event, data) => {
 	app.quit();
+});
+
+ipcMain.on('open-info', (event, data) => {
+	shell.openExternal(productURL);
 });
