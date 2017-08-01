@@ -7,33 +7,22 @@ $(document).ready( () => {
     setUpListeners();
     setUpFormActions();
 
-    /* TEST MODAL
-    $('#test-alerts').on('click', function() {
-        ipcRenderer.send('alert-user', {});
-    })*/
-
 });
 
 
 function setUpListeners() {
 
-	$('#edit-day-hours').on('click', function() {
-    	$(this).hide();
-    	$(this).next().fadeIn();
+	$('#dayhours').bind('click', function() {
 
         var data = ipcRenderer.sendSync('auto-fill-day-hours', {});
         $('#wakeTimeHH').val(data.wakeTimeHH);
         $('#wakeTimeMM').val(data.wakeTimeMM);
         $('#sleepTimeHH').val(data.sleepTimeHH);
         $('#sleepTimeMM').val(data.sleepTimeHH);
-        $('#input-day-hours').fadeIn();
 
     });
 
-    $('#edit-interval').on('click', function() {
-    	$(this).hide();
-    	$(this).next().fadeIn();
-
+    $('#intervals').bind('click', function() {
         var data = ipcRenderer.sendSync('auto-fill-interval', {});
         $('#userInterval').val(data);
 
@@ -61,8 +50,8 @@ function setUpFormActions() {
 
         ipcRenderer.send('update-user-config', data);
 
-        $('#form-1').hide();
-        $('#edit-day-hours').fadeIn();
+        //$('#form-1').hide();
+        //$('#edit-day-hours').fadeIn();
 
         $('#statusMsgToUser-1').append(statusHtml);
         $('#statusMsgToUser-1').fadeIn();
@@ -86,8 +75,8 @@ function setUpFormActions() {
 
         ipcRenderer.send('update-interval', interval);
 
-        $('#form-2').hide();
-        $('#edit-interval').fadeIn();
+        //$('#form-2').hide();
+        //$('#edit-interval').fadeIn();
 
         $('#statusMsgToUser-2').append(statusHtml);
         $('#statusMsgToUser-2').fadeIn();
@@ -106,8 +95,8 @@ function setUpFormActions() {
     $('#discard-1').bind('click', function() {
         var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-remove-circle"></span> Changes Discarded</b></div>';
 
-        $('#form-1').hide();
-        $('#edit-day-hours').fadeIn();
+        //$('#form-1').hide();
+        //$('#edit-day-hours').fadeIn();
 
         $('#statusMsgToUser-1').children().remove();
         $('#statusMsgToUser-1').empty();
@@ -129,8 +118,8 @@ function setUpFormActions() {
     $('#discard-2').bind('click', function() {
         var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-remove-circle"></span> Changes Discarded</b></div>';
 
-        $('#form-2').hide();
-        $('#edit-interval').fadeIn();
+        //$('#form-2').hide();
+        //$('#edit-interval').fadeIn();
 
         $('#statusMsgToUser-2').children().remove();
         $('#statusMsgToUser-2').empty();

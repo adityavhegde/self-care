@@ -11,78 +11,78 @@
 </head>
 
 <body>
-	<div class="container">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <a class="navbar-brand" href="#">Self care</a>
-	          <div class="pull-right" style="margin-right:5px">
-	          	<a style="margin-top:10px" href="#" id="info-btn"
-	          	class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="About">
-	          	  <span class="glyphicon glyphicon-info-sign"></span>
-	          	</a>
-	          	<button class="btn btn-default" id="close-app-btn" style="margin-top:10px" type="button"
-	          	data-toggle="tooltip" data-placement="bottom" title="Close App">
-	          	  <span class="glyphicon glyphicon-off"></span>
-	          	</button>
-	        </div>
-	        </div>
-	      </div>
-    	</nav>
-	
-		<div class="container">
-			<div class="alert" id="statusMsgToUser-1" style="display:none; padding-bottom: 5px; padding-top: 5px">
-			 </div>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Self care</a>
+          <div class="pull-right" style="margin-right:5px">
+          	<a style="margin-top:10px" href="#" id="info-btn"
+          	class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="About">
+          	  <span class="glyphicon glyphicon-info-sign"></span>
+          	</a>
+          	<button class="btn btn-default" id="close-app-btn" style="margin-top:10px" type="button"
+          	data-toggle="tooltip" data-placement="bottom" title="Close App">
+          	  <span class="glyphicon glyphicon-off"></span>
+          	</button>
+        </div>
+        </div>
+      </div>
+	</nav>
 
-			<div class="alert" id="statusMsgToUser-2" style="display:none; padding-bottom: 5px; padding-top: 5px">
-			 </div>
+	<ul class="nav nav-tabs" style="margin-top:-20px">
+		<li class="active"><a data-toggle="tab" href="#dayhours" data-target="#dayhours">Day Hours</a></li>
+		<li><a data-toggle="tab" href="#intervals" dayhours="#intervals">Intervals</a></li>
+		<li><a data-toggle="tab" href="#custommsg" dayhours="#custommsg">Message</a></li>
+	</ul>
 
+	<div class="tab-content">
+		<!-- SET WAKE HOURS SETTINGS -->
+		<div class="tab-pane fade in active" style="text-align: center; style="margin-top: 15px;" id="dayhours">
+			<div class="container">
+				<div class="alert" id="statusMsgToUser-1" style="display:none; margin-top:10px;padding-bottom: 5px; padding-top: 5px">
+				 </div>
 
-
-			<!-- SET WAKE HOURS SETTINGS -->
-			<div class="row" style="text-align: center;">
-				<button type="button" class="btn btn-primary" id="edit-day-hours">
-					<span class="glyphicon glyphicon-pencil" style="margin-right:5px"></span>
-					Set Day Hours
-				</button>
-
-				<form style="display: none;" id="form-1">
-					<!-- SAVE/DISCARD BUTTONS -->
-					<div>
-						<button type="button" class="btn btn-success" id="submit-1" style="width: 69px" data-toggle="tooltip" title="Save Changes">
-							<span class="glyphicon glyphicon-floppy-saved"></span>
-						</button>
-						<button type="button" class="btn btn-danger" style="width: 69px" id="discard-1" data-toggle="tooltip" title="Discard Changes">
-							<span class="glyphicon glyphicon-trash"></span>
-						</button>	
-					</div>
-			
-						<!-- INPUT -->
-					<div id="input-day-hours" style="margin-top: 10px;" class="greyText">
+				<form id="form-1" style="margin-top: 10px">
+					<!-- INPUT -->
+					<div id="input-day-hours" class="greyText">
 						<div>
 							<b>WAKE UP</b> <input type="number" placeholder="HH" style="display: inline; width:40px" class="form-control" id="wakeTimeHH">	
 								<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control" id="wakeTimeMM"><br>
 						</div>
 
 						<div style="margin-top: 10px">
-							<b>SLEEP</b> <input type="number" placeholder="HH" style="display: inline; margin-left:15px; width:40px" class="form-control" id="sleepTimeHH">	
+							<b>SLEEP</b> <input type="number" placeholder="HH" style="display: inline; margin-left:19px; width:40px" class="form-control" id="sleepTimeHH">	
 								<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control"
 								id="sleepTimeMM">
 						</div>
+						<br>
+
+						<!-- SAVE/DISCARD BUTTONS -->
+						<div>
+							<button type="button" class="btn btn-success" id="submit-1" style="width: 80px" data-toggle="tooltip" title="Save Changes">
+									<span class="glyphicon glyphicon-floppy-saved"></span>
+							</button>
+							<button type="button" class="btn btn-danger" style="width: 80px" id="discard-1" data-toggle="tooltip" title="Discard Changes">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>	
+					</div>
 					</div>
 				</form>
-			 </div>
-			 
+			</div>
+		 </div>
+		 
 
-			 <!-- SET INTERVAL BUTTON -->
-			 <br>
-			 <div class="row" style="text-align: center; margin-top:0px">
-				<button type="button" class="btn btn-primary" style="padding-right: 30px" id="edit-interval">
-					<span class="glyphicon glyphicon-pencil" style="margin-right:5px"></span>
-					Set Interval
-				</button>
+		 <!-- SET INTERVAL BUTTON -->
+		 <div class="tab-pane fade" style="text-align:center; margin-top: 15px;" id="intervals">
+		 	<div class="container">
+		 		<div class="alert" id="statusMsgToUser-2" style="display:none; padding-bottom: 5px; padding-top: 5px">
+		 		</div>
 
-				<form style="display: none;" id="form-2">
+				<form id="form-2" style="margin-top: 10px">
+					<div id="day-interval" style="margin-left:65px;">
+						<input type="number" class="form-control"
+						placeholder="Set the reminder intervals" id="userInterval"/><br>
+					</div>
 					<div>
 						<button type="button" class="btn btn-success" id="submit-2" style="width: 69px;" data-toggle="tooltip" title="Save Changes">
 							<span class="glyphicon glyphicon-floppy-saved"></span>
@@ -91,15 +91,13 @@
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>	
 					</div>
-					<br>
-					<div id="day-interval" style="margin-left:65px">
-						<input type="number" class="form-control"
-						placeholder="Set the reminder intervals" id="userInterval"/><br>
-					</div>
 				</form>
-			 </div>
-		 </div>	<!-- inner container div -->
-	 </div> <!-- main container div -->
+			</div>
+		 </div>
+
+		 <div class="tab-pane" id="custommsg">
+		 </div>
+	 </div>
 </body>
 <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 <script src="./js/jquery-3.2.1.min.js"></script>
