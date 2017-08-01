@@ -44,3 +44,7 @@ body {
     width:33.33333%;
     text-align: center;
 }
+
+label {
+  margin-top:10px;
+}
