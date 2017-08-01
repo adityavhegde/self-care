@@ -12,14 +12,18 @@
 <body>
   <div>
   	<h3 style="margin:0px" class="alert alert-info"><b>Walk time</b></h3>
-  	<p style="margin-left:10px" class="alert">Looks like you've been working hard today. Time to stretch out</p>
+    <!-- #TODO: add custom msg-->
+  	<p style="margin-left:10px" class="alert"></p>
   	<button type="button" style="width:100px; margin-right:20px" class="btn btn-primary pull-right">OK</button>
   </div>
 </body>
 <script type="text/javascript">
     let ipcRenderer = require('electron').ipcRenderer; 
+    document.getElementsByTagName('p')[0].textContent = ipcRenderer.sendSync('user-msg', {});
+    
     document.getElementsByTagName('button')[0].addEventListener('click', function() {
       ipcRenderer.send('close-modal', {});
     });
+
 </script>
 </html>

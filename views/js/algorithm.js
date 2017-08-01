@@ -24,12 +24,14 @@ ipcMain.on('close-modal', (event, data) => {
 
 var Scheduler = function() {
 	this.schedule = [];
-
 	this.userConfig;
+
 
 	this.interval;
 
 	this.IdToClearInterval;
+
+	this.userMsg;
 
 }
 
@@ -51,6 +53,7 @@ Scheduler.prototype.initUserConfig = function() {
 	
 	this.userConfig = userConfigObj.hours;
 	this.interval = userConfigObj.interval;		
+	this.userMsg = userConfigObj.userMsg;
 }
 
 Scheduler.prototype.updateUserConfig = function(config) {
@@ -66,7 +69,8 @@ Scheduler.prototype.updateUserConfig = function(config) {
 
 	var updatedConfig = { 
 		hours, 
-		'interval': this.interval
+		'interval': this.interval,
+		'userMsg': this.userMsg
 	};
 
 	var data = JSON.stringify(updatedConfig);
@@ -86,10 +90,12 @@ Scheduler.prototype.updateInterval = function(interval) {
 
 	//write updated interval to config.json
 	var hours = this.userConfig;
+	var userMsg = this.userMsg;
 
 	var updatedConfig = {
 		hours,
-		'interval': interval
+		'interval': interval,
+		userMsg
 	};
 
 	var data = JSON.stringify(updatedConfig);
@@ -102,6 +108,29 @@ Scheduler.prototype.updateInterval = function(interval) {
 	});
 
 };
+
+Scheduler.prototype.updateUserMsg = function(userMsg) {
+	this.userMsg = userMsg;
+	console.log('INFO: updated user alert message ' + this.userMsg);
+
+	var hours = this.userConfig;
+	var interval = this.interval;
+
+	var updatedConfig = {
+		hours, interval, 'userMsg': userMsg
+	}
+	
+	var data = JSON.stringify(updatedConfig);
+
+	fs.writeFile('./config.json', data, function(err) {
+		if(err) {
+			console.log('ERROR: there was problem updating config in config.json');
+		}
+		console.log('INFO: succesfully updated user alert message in config.json');
+	});
+
+
+}
 
 Scheduler.prototype.calculateRemindTimes = function() {
 	this.schedule = [];

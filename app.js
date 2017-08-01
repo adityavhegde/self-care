@@ -41,6 +41,14 @@ ipcMain.on('update-interval', (event, data) => {
 	schedulerInstance.startTimer();
 });
 
+ipcMain.on('update-notific-message', (event, data) => {
+	schedulerInstance.updateUserMsg(data);
+});
+
+ipcMain.on('user-msg', (event, data) => {
+	event.returnValue = schedulerInstance.userMsg;
+});
+
 ipcMain.on('auto-fill-day-hours', (event, data) => {
 	event.returnValue = schedulerInstance.userConfig;
 });
@@ -48,6 +56,7 @@ ipcMain.on('auto-fill-day-hours', (event, data) => {
 ipcMain.on('auto-fill-interval', (event, data) => {
 	event.returnValue = schedulerInstance.interval;
 });
+
 
 ipcMain.on('close-app', (event, data) => {
 	app.quit();

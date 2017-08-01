@@ -28,6 +28,11 @@ function setUpListeners() {
 
     });
 
+    $('#submit-3').on('click', function() {
+        var data = $('#userMsg').val();
+        ipcRenderer.send('update-notific-message', data);
+    });
+
     $('#close-app-btn').on('click', function() {
         ipcRenderer.send('close-app', {});
     });
