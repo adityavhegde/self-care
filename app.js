@@ -3,6 +3,7 @@ const ipcMain = require('electron').ipcMain;
 const {shell} = require('electron');
 const path = require('path');
 const schedulerInstance = require('./views/js/algorithm');
+const loadDefaultConfig = require('./loadDefaultConfig');
 //pass the options to create the necessary menu
 //menubar returned object already creates an app instance
 
