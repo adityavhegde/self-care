@@ -19,7 +19,7 @@ var defaultUserConfig = {
 var data = JSON.stringify(defaultUserConfig);
 
 if(!fs.existsSync('./config.json')){
-	fs.writeFile('./config.json', data, function(err) {
+	fs.writeFileSync('./config.json', data, function(err) {
 		if (err) {
 	  	console.log('There has been an error saving your configuration data.');
 	  	console.log(err.message);
