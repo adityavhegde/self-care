@@ -46,12 +46,12 @@
 					<!-- INPUT -->
 					<div id="input-day-hours" class="greyText">
 						<div>
-							<b>WAKE UP</b> <input type="number" placeholder="HH" style="display: inline; width:40px" class="form-control" id="wakeTimeHH">	
+							<b>Wake Up</b> <input type="number" placeholder="HH" style="display: inline; width:40px" class="form-control" id="wakeTimeHH">	
 								<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control" id="wakeTimeMM"><br>
 						</div>
 
 						<div style="margin-top: 10px">
-							<b>SLEEP</b> <input type="number" placeholder="HH" style="display: inline; margin-left:19px; width:40px" class="form-control" id="sleepTimeHH">	
+							<b>Sleep</b> <input type="number" placeholder="HH" style="display: inline; margin-left:19px; width:40px" class="form-control" id="sleepTimeHH">	
 								<input type="number" placeholder="MM" style="display: inline; width:40px" class="form-control"
 								id="sleepTimeMM">
 						</div>
@@ -95,8 +95,9 @@
 			</div>
 		 </div>
 
-		 <div class="tab-pane" id="custommsg">
+		 <div class="tab-pane" id="custommsg" style="margin-top: 10px;">
 		 	<div class="container">
+		 		<div id="statusMsgToUser-3" style="display:none; padding-bottom: 5px; padding-top: 5px"></div>
 			 	<label for="userMsg">Set your reminder message</label>
 			 	<textarea class="form-control" id="userMsg" rows="3"></textarea>
 				 <button type="button" class="btn btn-success" id="submit-3" style="width: 100%;margin-top:10px" data-toggle="tooltip" title="Save Changes">

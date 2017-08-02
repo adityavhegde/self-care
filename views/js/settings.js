@@ -28,10 +28,12 @@ function setUpListeners() {
 
     });
 
-    $('#submit-3').on('click', function() {
-        var data = $('#userMsg').val();
-        ipcRenderer.send('update-notific-message', data);
+    $('#userMsg').bind('click', function() {
+        var data = ipcRenderer.sendSync('user-msg', {});
+        $('#userMsg').val(data);
+
     });
+
 
     $('#close-app-btn').on('click', function() {
         ipcRenderer.send('close-app', {});
@@ -96,6 +98,30 @@ function setUpFormActions() {
 
         console.log(data);
     });  
+
+    $('#submit-3').bind('click', function() {
+        
+        var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-ok-circle"></span> Interval edited succesfully</b></div>';
+
+        var data = $('#userMsg').val();
+        ipcRenderer.send('update-notific-message', data);
+
+        $('#statusMsgToUser-3').append(statusHtml);
+        $('#statusMsgToUser-3').fadeIn();
+        $('#statusMsgToUser-3').addClass('alert-success');
+
+        setTimeout( () => {
+            $('#statusMsgToUser-3').children().remove();
+            $('#statusMsgToUser-3').empty();
+            $('#statusMsgToUser-3').css('display','none');
+
+        }, 5000);        
+
+        console.log(data);
+
+
+    }); 
+
 
     $('#discard-1').bind('click', function() {
         var statusHtml = '<div style="text-align:center"><b><span class="glyphicon glyphicon-remove-circle"></span> Changes Discarded</b></div>';
